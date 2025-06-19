@@ -6,6 +6,7 @@
 2. [Scenario](#scenario)
 3. [Identification](#identification)
 4. [Documentation](#documentation)
+5. [Remediation Strategy](#remediation)
 
 ## Introduction <a name="intro">
 
@@ -19,7 +20,7 @@ You are a cybersecurity analyst for yummyrecipesforme.com, a website that sells 
 
 The former employee/ hacker executed a brute force attack to gain access to the web host. They repeatedly entered several known default passwords for the administrative account until they correctly guessed the right one. After they obtained the login credentials, they were able to access the admin panel and change the website’s source code. They embedded a javascript function in the source code that prompted visitors to download and run a file upon visiting the website. After embedding the malware, the hacker changed the password to the administrative account. When customers download the file, they are redirected to a fake version of the website that contains the malware. 
 
-Several hours after the attack, multiple customers emailed yummyrecipesforme’s helpdesk. They complained that the company’s website had prompted them to download a file to access free recipes. The customers claimed that, after running the file, the address of the website changed and their personal computers began running more slowly. 
+Several hours after the attack, multiple customers emailed yummyrecipesforme’s helpdesk. They complained that the company’s website had prompted them to download a file to access free recipes. The customers claimed that, after running the file, the address of the website changed, and their personal computers began running more slowly. 
 
 In response to this incident, the website owner tries to log in to the admin panel but is unable to, so they reach out to the website hosting provider. You and other cybersecurity analysts are tasked with investigating this security event.
 
@@ -51,11 +52,20 @@ Your job is to document the incident in detail, including identifying the networ
 
 The HyperText Transfer Protocol (HTTP) was exploited during the incident. This can be deduced, as the issue was with accessing the web server for yummyrecipesforme.com, and we know that requests to web servers for web pages involve HTTP traffic.
 
-Another observation supporting this conclusion, would be that when we ran "tcpdump" and visited the "yummyrecipesforme.com" website, the log file showed the usage of the HTTP protocol when contacting the webpage, which resulted in a malicious file being downloaded (at the application layer) and a redirection occurring. 
+Another observation supporting this conclusion would be that when we ran "tcpdump" and visited the "yummyrecipesforme.com" website, the log file showed the usage of the HTTP protocol when contacting the webpage, which resulted in a malicious file being downloaded (at the application layer) and a redirection occurring. 
 
-## Documentation <a name="analysis">
+## Documentation <a name="documentation">
 
-The incident came to notice when several customers began contacting the company's helpdesk, and notified them about a file being downloaded (misrepresented to be a file containing new recipes) when they attempted to visit the website. The users' computers have been operating slowly since. The website owner tried logging into the administrator portal, but noticed their account was locked out.
+The incident became apparent when several customers began contacting the company's help desk. The helpdesk notified them that a file was being downloaded (misrepresented to be a file containing new recipes) when they attempted to visit the website. The users' computers have been operating slowly since. The website owner tried logging into the administrator portal but noticed their account was locked out.
 
-The cybersecurity analyst used a sandbox environment to open the website in an isolated environment (so that it does not affect the company's network). Then, the analyst utilized "tcpdump" to capture the network traffic produced by visiting the website. The analyst was prompted to download a file that claimed it contained new recipes. The analyst then accepted the download and ran the file. The browser than redirected the analyst to a fake website, "greatrecipesforme.com"
-The analyst was prompted to download a file claiming it would provide access to free recipes, accepted the download and ran it. The browser then redirected the analyst to a fake website (greatrecipesforme.com).
+The cybersecurity analyst used a sandbox environment to open the website in an isolated environment (so it does not affect the company's network). Then, the analyst utilized "tcpdump" to capture the network traffic produced by visiting the website. The analyst was prompted to download a file that claimed it contained new recipes. The analyst then accepted the download and ran the file. The browser then redirected the analyst to a fake website, "greatrecipesforme.com".
+
+The analyst investigated the "tcpdump" log and observed that the browser first requested the IP address for the website, "yummyrecipesforme.com". After the connection was established with the website (over HTTP), the analyst recalled downloading and executing the file. The logs signified that there was an abrupt change in network traffic as the browser requested the IP address of the website, "greatrecipesforme.com". The network traffic was also rerouted to the new IP address. 
+
+The senior analyst inspected the source code for the websites and the downloaded file. The analyst realized that an attacker had modified the website to add code that prompted the users to download a malicious file disguised as a free, new recipes list. As the owner of the website stated that they had been locked out of their (administrator) account, the team believes the attacker used a brute force attack to access the account and change the admin password. Executing the malicious file compromised the users' computers.
+
+## Remediation Strategy <a name="remediation">
+
+One security measure that the team plans to implement to mitigate and prevent future brute force attacks is to prohibit the reuse of previously used passwords. This was the vulnerability that led to this attack, as the attacker utilized a default password to log in. Another security initiative is frequent password updates. So that in case any unauthorized or malicious person becomes aware of the password, they are less likely to use it if the password is updated consistently. Two-factor authentication (2FA) will also be implemented as a supportive strategy. 
+
+2FA requires authentication with a password along with an additional method, such as confirming through a one-time passcode (OTP) sent to their email or phone. As the user confirms their identity through their login credentials along with the OTP, they will gain access to the system. Any malicious actor who attempts a brute force attack will not (likely) gain access to the system because it requires additional authentication.
