@@ -98,7 +98,7 @@ surveillance cameras, etc.
 
 ### Administrative Controls 
 | Control | Type | State | Priority |
-| --- | --- | --- | --- |
+| :-- | :-- | :-- | :-- |
 | Least privilege | Preventative | Not implemented | Severe |
 | Disaster recovery plans | Corrective | Not implemented | Severe |
 | Password policies | Preventative | Not implemented | Severe |
@@ -108,7 +108,7 @@ surveillance cameras, etc.
  
 ### Technical Controls 
 | Control | Type | State | Priority |
-| --- | --- | --- | --- |
+| :-- | :-- | :-- | :-- |
 | Firewall | Preventative | Implemented | N/A |
 | Intrusion Detection System (IDS) | Detective | Not implemented | Severe |
 | Encryption | Deterrent | Not implemented | Severe |
@@ -120,7 +120,7 @@ surveillance cameras, etc.
 
 ### Physical Controls
 | Control | Type | State | Priority |
-| --- | --- | --- | --- |
+| :-- | :-- | :-- | :-- |
 | Time-controlled safe | Deterrent | Not implemented | Minor |
 | Adequate lighting | Deterrent | Not implemented | Minor |
 | Closed-circuit Television (CCTV) surveillance | Preventative/detective | Not implemented | Severe/Moderate |
