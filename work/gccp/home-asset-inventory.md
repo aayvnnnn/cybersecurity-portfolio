@@ -1,18 +1,14 @@
-# Botium Toys Security Audit
+# Home Asset Inventory
 
 ## Table of contents
 
 1. [Intro](#intro)
 2. [Scenario](#scenario)
-3. [Security Audit Workflow](#workflow)
-4. [Controls Assessment](#control-assessment)
-5. [Compliance Checklist](#compliance-checklist)
-6. [Stakeholder Memo](#stakeholder-memo)
-7. [Conclusion](#conclusion)
-
+3. [Assets](#assets)
+   
 ## Introduction <a name="intro">
 
-An asset inventory and classification performed for a home office. Completed as a part of my cybersecurity portfolio and as a part of the <a href='https://www.coursera.org/learn/manage-security-risks?specialization=cybersecurity-certificate'> Play It Safe: Manage Security Risks </a> course 
+An asset inventory and classification performed for a home office. Completed as part of my cybersecurity portfolio and as part of the <a href='https://www.coursera.org/learn/assets-threats-and-vulnerabilities?specialization=cybersecurity-certificate'> Assets, Threats, and Vulnerabilities</a>  course 
 in Google's <a href='https://www.coursera.org/google-certificates/cybersecurity-certificate'>Cybersecurity Professional Certificate</a> on <a href='https://www.coursera.org/'>Coursera</a>.
    
 The goal is to effectively identify, list, and classify the business’s assets to establish a solid foundation for a strong security plan and overall security posture.
@@ -44,7 +40,9 @@ To do this, you will start by identifying three devices that have access to your
 
 Then, you’ll list important characteristics of each device such as its owner, location, and type. Finally, you will assign each device a level of sensitivity based on how important it is to protect.
 
-# Categories
+## Assets <a name="assets">
+
+### Classification 
 
 | Categories | Access Designation |
 | :--------- | :----------------- |
@@ -52,3 +50,14 @@ Then, you’ll list important characteristics of each device such as its owner, 
 | Confidential | Limited to specific users |
 | Internal-only | Users on-premises | 
 | Public | Anyone | 
+
+### Inventory
+
+| Asset | Network Access |	Owner	| Location | Notes | Sensitivity | 
+| :---- | :------------- | :---- | :------- | :---- | :---------- |
+| Network router | Continuous | Internet service provider (ISP) | On-premises | Has a 2.4 GHz and 5 GHz connection. All devices on the home network connect to the 5 GHz frequency.	| Confidential	| 
+| Desktop | Occasional | Homeowner | On-premises |	Contains private information, like photos. | Restricted | 
+| Guest smartphone | Occasional | Friend | On and Off-premises | Connects to my home network. | Internal-only | 
+| Television | Continuous | Homeowner | On-premises | Smart TV connected to the network for watching videos.| Internal-only
+| Laptop | Continuous | Homeowner | On-premises | Used for work, browsing, and everyday tasks. | Internal-only
+| Server | Continuous | Homeowner | On-premises | NAS server storing various files, folders, and data backups. | Restricted
